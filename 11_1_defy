@@ -1,0 +1,15 @@
+#print("Step-1")
+def priint():
+    print("Privet")
+#print("Step-2")
+def echo (m):
+    return m
+#print("Step-3")
+def summ(x, y):
+    return x+y
+#print("Step-4")
+#print("print ",priint(),"\necho: ",echo('www'),"\nsumm: ",summ('www','rrr'))
+def back(f,r):
+    return f(r)
+print("www=", back(echo, 'huy'))
+print(back.__sizeof__())
