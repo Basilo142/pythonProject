@@ -33,8 +33,16 @@ def plus(key, value):
 
 def gat(key):
     data = get_data()
+    nost=data.get(key)
 
-    return data.get(key)
+    if nost :
+        st=', '.join(nost)
+        return st
+    #print(st)
+
+    return
+
+        #data.get(key)
 
 
 parser = argparse.ArgumentParser()
@@ -47,7 +55,7 @@ args = parser.parse_args()
 if args.key and args.val:
     plus(args.key, args.val)
 elif args.key:
-    print(str(gat(args.key)))
+    print(gat(args.key))
 else:
     print('Error')
 
