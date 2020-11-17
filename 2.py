@@ -1,9 +1,9 @@
-summ=0
-while True:
-    x=input("Введите число: ")
-    if x=='stop':
-        break
-    x=int(x)
-    summ+=x
-print(summ)
-input()
+class MyClass(object):
+    i = 123
+
+    def __init__(self):
+        self.i = 345
+
+print('MyClass().i = ',MyClass().i)
+
+print("MyClass = ", MyClass.i)
