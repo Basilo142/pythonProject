@@ -1,26 +1,36 @@
-class MyClass:
-    def __init__(self):
-        self.x=100
-    def print_x(self,y=None):
-        self.y=y
-        if not y:
-            print(self.x)
-        else:
-            print(self.y)
+import csv
+
+with open(csv_filename) as csv_fd:
+    reader = csv.reader(csv_fd, delimiter=';')
+    next(reader)  # пропускаем заголовок
+    for row in reader:
+        print(row)
 
 
 
 
-c=MyClass()
 
-c.print_x(2)
-c.print_x()
-#c.print_x
-print("c.x = ", c.x)
-print("getattr = ", getattr(c, "x"))
-print("getattr = ", getattr(c, "print_x")())
-print(c.x)
-print("delattr = ", delattr(c, "x"))
-#print(c.x)
-c.print_x(2)
-c.print_x()
+
+class CarBase:
+    def __init__(self, brand, photo_file_name, carrying):
+        pass
+
+
+class Car(CarBase):
+    def __init__(self, brand, photo_file_name, carrying, passenger_seats_count):
+        pass
+
+
+class Truck(CarBase):
+    def __init__(self, brand, photo_file_name, carrying, body_whl):
+        pass
+
+
+class SpecMachine(CarBase):
+    def __init__(self, brand, photo_file_name, carrying, extra):
+        pass
+
+
+def get_car_list(csv_filename):
+    car_list = []
+    return car_list
