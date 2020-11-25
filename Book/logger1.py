@@ -3,7 +3,7 @@ def logger(func):
     @functools.wraps(func)
     def wra(*args,**kwargs):
         result=func(*args, **kwargs)
-        with open ('logg.txt','a') as f:
+        with open ('logg.txt', 'a') as f:
             f.write(str(result)+'\n')
         return result
     return wra
