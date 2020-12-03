@@ -1,15 +1,9 @@
-import time
-from progress.bar import IncrementalBar
-
-mylist = [1,2,3,4,5,6,7,8]
-
-bar = IncrementalBar('Countdown', max = len(mylist))
-
-for item in mylist:
-    bar.next()
-    time.sleep(1)
-
-bar.finish()
-#/*sdgsdfgsdfgsdfgsdfgsdfgsdf*/
-# dfgsdfgsdf
-#//sdfgsdfgsdfgsdfgsdfg
+import random
+import datetime
+a = str(random.randint(0,1000))
+print(type(a))
+a = random.randint(0,1000)
+print(type(a))
+b=datetime.datetime.today().strftime("%Y%m%d%H%M%S")
+print(b)
+print(type(b))
