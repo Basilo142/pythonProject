@@ -1,37 +1,17 @@
-import requests
+import os
 
+put = os.path.abspath('text.txt')
+print(os.path.splitext('text.txt'))
+print(type(put), put)
 
-class Asteroid:
-    BASE_API_URL = 'https://api.nasa.gov/neo/rest/v1/neo/{}?api_key=DEMO_KEY'
+f = lambda x: x + 2
 
-    def __init__(self, spk_id):
-        self.api_url = self.BASE_API_URL.format(spk_id)
+data = [1, 2, 3, 4]
+f_data = [y for x in data if (y := f(x)) != 4]
 
-    def get_data(self):
-        return requests.get(self.api_url).json()
+print(f_data)
 
-    @property
-    def name(self):
-        return self.get_data()['name']
-
-    @property
-    def diameter(self):
-        return int(self.get_data()['estimated_diameter']['meters']['estimated_diameter_max'])
-
-    @property
-    def closest_approach(self):
-        closest = {
-            'date': None,
-            'distance': float('inf')
-        }
-        for approach in self.get_data()['close_approach_data']:
-            distance = float(approach['miss_distance']['lunar'])
-            if distance < closest['distance']:
-                closest.update({
-                    'date': approach['close_approach_date'],
-                    'distance': distance
-                })
-        return closest
-
-
-apophis = Asteroid(2099942)
+g = [y := f(3), y ** 2, y ** 3]
+print(g)
+print(y)
+print("Все")
