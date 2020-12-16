@@ -3,12 +3,11 @@ import csv
 
 
 class CarBase:
-
     def __init__(self, brand, photo_file_name, carrying):
         # self.car_type = car_type
         self.photo_file_name = photo_file_name
         self.brand = brand
-        self.carrying = float(carrying)
+        self.carrying = carrying
 
     def get_photo_file_ext(self):
         ext = os.path.splitext(self.photo_file_name)
@@ -17,13 +16,12 @@ class CarBase:
 
 class Car(CarBase):
     car_type = 'car'
-
     def __init__(self, brand, passenger_seats_count, photo_file_name, carrying):
         super().__init__(brand, photo_file_name, carrying)
         try:
             self.passenger_seats_count = int(passenger_seats_count)
         except ValueError:
-            self.passenger_seats_count = int()
+            pass
 
     @classmethod
     def instance(cls, row):
