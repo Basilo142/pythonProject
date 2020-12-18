@@ -1,5 +1,6 @@
 import os
 import csv
+import sys
 
 
 class CarBase:
@@ -17,13 +18,20 @@ class CarBase:
 
 class Car(CarBase):
     car_type = 'car'
+    def __new__(cls, brand, passenger_seats_count, photo_file_name, carrying):
+        try:
+            self.passenger_seats_count = int(passenger_seats_count)
+        except ValueError:
+            return None
+        else:
+            return super().__new__(cls)
 
     def __init__(self, brand, passenger_seats_count, photo_file_name, carrying):
         super().__init__(brand, photo_file_name, carrying)
         try:
             self.passenger_seats_count = int(passenger_seats_count)
         except ValueError:
-            self.passenger_seats_count = int()
+            print("ЖОПА")
 
     @classmethod
     def instance(cls, row):
@@ -33,6 +41,7 @@ class Car(CarBase):
             row[3],
             row[5],
         )
+    print()
 
 
 class Truck(CarBase):

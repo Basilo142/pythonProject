@@ -16,6 +16,7 @@ class CarBase:
 
 class Car(CarBase):
     car_type = 'car'
+
     def __init__(self, brand, passenger_seats_count, photo_file_name, carrying):
         super().__init__(brand, photo_file_name, carrying)
         try:
