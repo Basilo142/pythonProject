@@ -1,20 +1,3 @@
-import time
-import os
-from multiprocessing import Process
-
-class Print(Process):
-    def __init__(self, name):
-        super().__init__()
-        self.name = name
-
-    def run(self):
-        print("hello", self.name)
-
-
-p = Print("Wikki")
-p.start()
-p.join()
-
 
 
 

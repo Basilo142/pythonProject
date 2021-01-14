@@ -1,32 +1,51 @@
-import concurrent.futures
-import math
+def zero():
+    pass
+def one():
+    pass
 
-PRIMES = [
-    112272535095292,
-    112582705942171,
-    112272535095293,
-    115280095190773,
-    115797848077099,
-    1099726899285419]
+def two():
+    pass
+def three():
+    pass
+def four():
+    pass
+def five():
+    print(5)
+def six():
+    pass
 
-def is_prime(n):
-    if n < 2:
-        return False
-    if n == 2:
-        return True
-    if n % 2 == 0:
-        return False
+def seven():
+    print(7)
+def eight():
+    pass
+def nine():
+    pass
 
-    sqrt_n = int(math.floor(math.sqrt(n)))
-    for i in range(3, sqrt_n + 1, 2):
-        if n % i == 0:
-            return False
-    return True
+def plus():
+    pass
+def minus():
+    pass
 
-def main():
-    with concurrent.futures.ProcessPoolExecutor() as executor:
-        for number, prime in zip(PRIMES, executor.map(is_prime, PRIMES)):
-            print('%d is prime: %s' % (number, prime))
+def times():
+    print("+")
+def divided_by():
+    pass
+
 
 if __name__ == '__main__':
-    main()
+    print("Example:")
+    print(seven(times(five())))
+
+    #some test cases for you...
+    assert wave("hello") == ["Hello", "hEllo", "heLlo", "helLo", "hellO"]
+    assert wave("codewars") == ["Codewars", "cOdewars", "coDewars", "codEwars", "codeWars", "codewArs", "codewaRs", "codewarS"]
+    assert wave("") == []
+    assert wave("two words") == ["Two words", "tWo words", "twO words", "two Words", "two wOrds", "two woRds", "two worDs", "two wordS"]
+    # assert alphabet_position(70304) == '70000 + 300 + 4'
+    # ven_index([20, 10, 30, 10, 10, 15, 35]) == 3
+    # assert find_even_index([20, 10, -80, 10, 10, 15, 35]) == 0
+    # assert find_even_index([10, -80, 10, 10, 15, 35, 20]) == 6
+    # assert find_even_index(list(range(1, 100))) == -1
+    # assert find_even_index([0, 0, 0, 0, 0]) == 0
+    # assert find_even_index([-1, -2, -3, -4, -3, -2, -1]) == 3
+    # assert find_even_index(list(range(-100, -1))) == -1
