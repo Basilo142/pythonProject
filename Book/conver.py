@@ -1,5 +1,6 @@
 tnumb = 0
 
+
 def conver(tnumb):
     try:
         whot = int(input('''Какой тип числа Вы вводите: 
@@ -32,7 +33,7 @@ def conver(tnumb):
             if ex == 'q' or ex == 'Q':
                 return
             else:
-                return (conver(tnumb))
+                return conver(tnumb)
     # except ValueError:
     except BaseException:
         print('\nЧто-то пошло не так((((...\nПопробуй еще раз)\n')
@@ -44,5 +45,7 @@ def conver(tnumb):
             return conver(tnumb)
 
     input()
-    return (conver(tnumb))
+    return conver(tnumb)
+
+
 print(conver(tnumb))
