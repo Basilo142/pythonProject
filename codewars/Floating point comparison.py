@@ -1,19 +1,41 @@
-def int32_to_ip(int32):
-    s = "{0:b}".format(int32)
-    print(s)
-    # print(bi)
-    return s
+def get_pins(observed):
+    x = {
+        '0': '8',
+        '1': ('2', '4'),
+        '2': ('1', '3', '5'),
+        '3': ('2', '6'),
+        '4': ('1', '5', '7'),
+        '5': ('2', '4', '6', '8'),
+        '6': ('3', '5', '9'),
+        '7': ('4', '8'),
+        '8': ('5', '7', '9', '0'),
+        '9': ('6', '8')
+    }
+    l = [observed]
+    for i in observed:
+        st = observed
+        print("i-",i)
+        for v in x[i]:
+            print('x[i]=',x[i],'v=',v,'i=',i)
+            st = observed
+            print("st=",st)
+            st=st.replace(i,v)
+            print('st==',st)
+            l.append(st)
+            print('l=',l)
+        pass
+
+    return l
 
 
 if __name__ == "__main__":
-    print(int32_to_ip(2154959208))
-    print("128.114.17.104")
+    print(get_pins('8'))
+    print(['5', '7', '8', '9', '0'])
+    print(get_pins('11'))
+    print(["11", "22", "44", "12", "21", "14", "41", "24", "42"])
 
-
-    assert int32_to_ip(2154959208) == "128.114.17.104"
-    assert int32_to_ip(0) == "0.0.0.0"
-    assert int32_to_ip(2149583361) == "128.32.10.1"
-    # assert approx_equals(1456.3652, 1456.3641) == False
-    # assert approx_equals(-1.234, -1.233999) == True
-    # assert approx_equals(98.7655, 98.7654999) == True
-    # assert approx_equals(-7.28495, -7.28596) == False
+    # assert observed([]) == 'no one likes this'
+    # assert observed(['Peter']) == 'Peter likes this'
+    # assert likes(['Jacob', 'Alex']) == 'Jacob and Alex like this'
+    # assert likes(['Max', 'John', 'Mark']) == 'Max, John and Mark like this'
+    # assert likes(['Alex', 'Jacob', 'Mark', 'Max']) == 'Alex, Jacob and 2 others like this'

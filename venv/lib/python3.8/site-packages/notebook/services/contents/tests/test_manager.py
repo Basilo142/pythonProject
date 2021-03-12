@@ -1,6 +1,4 @@
-# coding: utf-8
 """Tests for the notebook manager."""
-from __future__ import print_function
 
 import os
 import sys
@@ -8,16 +6,14 @@ import time
 from contextlib import contextmanager
 from itertools import combinations
 
-from nose import SkipTest
 from tornado.web import HTTPError
-from unittest import TestCase
+from unittest import TestCase, skipIf
 from tempfile import NamedTemporaryFile
 
 from nbformat import v4 as nbformat
 
 from ipython_genutils.tempdir import TemporaryDirectory
 from traitlets import TraitError
-from ipython_genutils.testing import decorators as dec
 
 from ..filemanager import FileContentsManager
 
@@ -108,7 +104,6 @@ class TestFileContentsManager(TestCase):
         self.assertEqual(cp_dir, os.path.join(root, cpm.checkpoint_dir, cp_name))
         self.assertEqual(cp_subdir, os.path.join(root, subd, cpm.checkpoint_dir, cp_name))
 
-    @dec.skipif(sys.platform == 'win32' and sys.version_info[0] < 3)
     def test_bad_symlink(self):
         with TemporaryDirectory() as td:
             cm = FileContentsManager(root_dir=td)
@@ -129,7 +124,7 @@ class TestFileContentsManager(TestCase):
             # broken symlinks should still be shown in the contents manager
             self.assertTrue('bad symlink' in contents)
 
-    @dec.skipif(sys.platform == 'win32')
+    @skipIf(sys.platform == 'win32', "will not run on windows")
     def test_recursive_symlink(self):
         with TemporaryDirectory() as td:
             cm = FileContentsManager(root_dir=td)
@@ -149,7 +144,6 @@ class TestFileContentsManager(TestCase):
             # recursive symlinks should not be shown in the contents manager
             self.assertNotIn('recursive', contents)
 
-    @dec.skipif(sys.platform == 'win32' and sys.version_info[0] < 3)
     def test_good_symlink(self):
         with TemporaryDirectory() as td:
             cm = FileContentsManager(root_dir=td)
@@ -169,13 +163,10 @@ class TestFileContentsManager(TestCase):
                 [symlink_model, file_model],
             )
 
-    def test_403(self):
-        if hasattr(os, 'getuid'):
-            if os.getuid() == 0:
-                raise SkipTest("Can't test permissions as root")
-        if sys.platform.startswith('win'):
-            raise SkipTest("Can't test permissions on Windows")
 
+    @skipIf(hasattr(os, 'getuid') and os.getuid() == 0, "Can't test permissions as root")
+    @skipIf(sys.platform.startswith('win'), "Can't test permissions on Windows")
+    def test_403(self):
         with TemporaryDirectory() as td:
             cm = FileContentsManager(root_dir=td)
             model = cm.new_untitled(type='file')

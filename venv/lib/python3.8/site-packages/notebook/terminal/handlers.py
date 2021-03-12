@@ -1,9 +1,9 @@
-#encoding: utf-8
 """Tornado handlers for the terminal emulator."""
 
 # Copyright (c) Jupyter Development Team.
 # Distributed under the terms of the Modified BSD License.
 
+import json
 from tornado import web
 import terminado
 from notebook._tz import utcnow
@@ -16,7 +16,34 @@ class TerminalHandler(IPythonHandler):
     @web.authenticated
     def get(self, term_name):
         self.write(self.render_template('terminal.html',
-                   ws_path="terminals/websocket/%s" % term_name))
+                       ws_path="terminals/websocket/%s" % term_name))
+
+
+class NamedTerminalHandler(IPythonHandler):
+    """Creates and renders a named terminal interface."""
+    @web.authenticated
+    def get(self):
+        model = self.terminal_manager.create()
+        term_name = model['name']
+        new_path = self.request.path.replace("terminals/new", "terminals/" + term_name)
+        self.redirect(new_path)
+
+
+class NewTerminalHandler(IPythonHandler):
+    """Creates and renders a terminal interface using the named argument."""
+    @web.authenticated
+    def get(self, term_name):
+        if term_name == 'new':
+            raise web.HTTPError(400, "Terminal name 'new' is reserved.")
+        new_path = self.request.path.replace("new/{}".format(term_name), term_name)
+        if term_name in self.terminal_manager.terminals:
+            self.set_header('Location', new_path)
+            self.set_status(302)
+            self.finish(json.dumps(self.terminal_manager.get_terminal_model(term_name)))
+            return
+
+        self.terminal_manager.create_with_name(term_name)
+        self.redirect(new_path)
 
 
 class TermSocket(WebSocketMixin, IPythonHandler, terminado.TermSocket):
@@ -33,14 +60,14 @@ class TermSocket(WebSocketMixin, IPythonHandler, terminado.TermSocket):
             raise web.HTTPError(403)
         if not args[0] in self.term_manager.terminals:
             raise web.HTTPError(404)
-        return super(TermSocket, self).get(*args, **kwargs)
+        return super().get(*args, **kwargs)
 
     def on_message(self, message):
-        super(TermSocket, self).on_message(message)
+        super().on_message(message)
         self._update_activity()
 
     def write_message(self, message, binary=False):
-        super(TermSocket, self).write_message(message, binary=binary)
+        super().write_message(message, binary=binary)
         self._update_activity()
 
     def _update_activity(self):
