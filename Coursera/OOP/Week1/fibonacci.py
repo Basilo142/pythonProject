@@ -8,4 +8,4 @@ def fibonacci(n):
 
 
 for i in range(20):
-    print(fibonacci(i+1), end=" / ")
+    print("{" ,str(i+2)+'-й', '=', fibonacci(i + 2), end=" }")
