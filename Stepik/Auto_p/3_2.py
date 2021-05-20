@@ -1,2 +1,6 @@
-def test_substring(full_string, substring):
-    assert substring in full_string, "expected '{}' to be substring of '{}'".format(substring, full_string)
+b = int(input())
+s = 0
+while b != 0:
+    s += b
+    b = int(input())
+print(s)
