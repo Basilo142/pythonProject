@@ -8,7 +8,7 @@ img="123123.jpg"
 
 
 def grayscale(rgb):
-    return np.dot(rgb[...,:3], [0.299, 0.578, 0.114])
+    return np.dot(rgb[...,:4], [0.299, 0.578, 0.114])
 
 
 def dodge(front, back):
