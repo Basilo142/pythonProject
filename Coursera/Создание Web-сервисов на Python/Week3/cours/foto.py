@@ -4,7 +4,7 @@ import cv2
 import scipy.ndimage
 import numpy
 
-img = "1231.jpg"
+img = "bb.jpg"
 
 
 def grayscale(rgb):
@@ -47,7 +47,7 @@ def edge_mask(img, line_size, blur_value):
 
 
 line_size = 9
-blur_value = 5
+blur_value = 9
 
 edges = edge_mask(img, line_size, blur_value)
 a=1
@@ -69,7 +69,7 @@ def color_quantization(img, k):
     return result
 
 
-total_color = 15
+total_color = 9
 img = color_quantization(img, total_color)
 
 gr_im2= Image.fromarray(img).save('1231-4.png')
