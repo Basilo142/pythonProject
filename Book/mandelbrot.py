@@ -10,7 +10,7 @@ y = 40
 os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (x,y)
 # --------------------------------------------------------------------
 
-pygame.init()
+# pygame.init()
 
 W = 1200
 H = 600
