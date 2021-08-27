@@ -6,4 +6,4 @@ else:
     def echo():
         print("Фигня")
 echo()
-input()
+# input()
