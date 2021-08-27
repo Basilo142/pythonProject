@@ -1,13 +1,12 @@
 class Npc:
 
     def __init__(self):
-        # self.name_npc = None
+        self.name_npc = None
         self.hp = 0
 
         print('start')
 
     def add_nam(self, name_npc):
-
         self.name_npc = name_npc
         print('name_Classs')
 
