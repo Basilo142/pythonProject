@@ -3,6 +3,9 @@ class VigenereCipher(object):
     def __str__(self):
         return 'class VigenereCipher'
 
+    def __repr__(self):
+        return '__repr__, class '
+
     def __init__(self, key: str, alphabet: str) -> object:
         self.key = key
         self.alphabet = alphabet
@@ -31,4 +34,5 @@ if __name__ == '__main__':
     alphabet = 'abcdefghijklmnopqrstuvwxyz'
     user = VigenereCipher(key, alphabet)
     print(user)
+
     #(c.encode('codewars'), 'rovwsoiv')
