@@ -1,3 +1,5 @@
+import time
+
 import pytest
 
 
@@ -7,4 +9,5 @@ def innermost(order):
 
 
 def test_order(order, top):
+    time.sleep(3)
     assert order == ["innermost top", "top"]
